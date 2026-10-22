@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Sidebar from './components/sidebar/Sidebar';
+import TopNav from './components/navbar/TopNav';
+import BoardHeader from './components/board/BoardHeader';
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex min-h-screen bg-slate-50">
+      {/* 1. Left Sidebar */}
+      <Sidebar />
+
+      
+      <div className="flex-1 flex flex-col p-8 overflow-y-auto">
+        <TopNav />
+        <BoardHeader />
+        {/* Yahan agle step mein Board Views aur Kanban Columns aayenge */}
+      
+      </div>
+      
     </div>
+    
   );
 }
-
-export default App;
