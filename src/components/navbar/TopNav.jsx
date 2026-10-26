@@ -1,36 +1,29 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import { Search, HelpCircle } from 'lucide-react';
 
-export default function TopNav({ onActionClick }) {
+export default function TopNav({ breadcrumb = 'Projects > Real Estate App', title = 'Mobile App Projects' }) {
   return (
     <header className="flex flex-col md:flex-row md:items-center justify-between pb-6 gap-4 border-b border-slate-100">
+      {/* Left side: Dynamic Breadcrumb & Title */}
       <div>
         <div className="flex items-center gap-1.5 text-xs text-slate-400 font-medium mb-1">
-          <span>Projects</span>
-          <span>&gt;</span>
-          <span className="text-slate-600 font-semibold">Real Estate App</span>
+          <span>{breadcrumb}</span>
         </div>
-        <h1 className="text-2xl font-bold text-blue-600">Mobile App Projects</h1>
+        <h1 className="text-2xl font-bold text-blue-600">{title}</h1>
       </div>
 
+      {/* Right side: Search, Avatars, Share, Help */}
       <div className="flex items-center gap-4">
-        {/* Find Task Search Input */}
         <div className="relative">
           <Search size={15} className="absolute left-3 top-2.5 text-slate-400" />
           <input
             type="text"
             placeholder="Find task..."
-            onFocus={onActionClick}
             className="bg-white border border-slate-200 rounded-full pl-9 pr-4 py-1.5 text-xs text-slate-700 outline-none w-56 focus:border-blue-500 shadow-sm"
           />
         </div>
 
-        {/* Team Avatars */}
-        <div 
-          onClick={onActionClick} 
-          className="flex items-center -space-x-2 cursor-pointer hover:opacity-80 transition-opacity"
-        >
+        <div className="flex items-center -space-x-2">
           <img
             src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60&auto=format&fit=crop&q=60"
             alt="member"
@@ -51,19 +44,11 @@ export default function TopNav({ onActionClick }) {
           </span>
         </div>
 
-        {/* Share Button */}
-        <button 
-          onClick={onActionClick}
-          className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-1.5 rounded-lg transition-colors shadow-sm"
-        >
+        <button className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-1.5 rounded-lg transition-colors shadow-sm">
           <span>Share</span>
         </button>
 
-        {/* Help Icon */}
-        <button 
-          onClick={onActionClick} 
-          className="text-slate-400 hover:text-slate-600"
-        >
+        <button className="text-slate-400 hover:text-slate-600">
           <HelpCircle size={18} />
         </button>
       </div>
