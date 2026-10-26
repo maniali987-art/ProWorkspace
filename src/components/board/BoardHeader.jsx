@@ -11,14 +11,24 @@ export default function BoardHeader({ onTabClick }) {
     { id: 'table', label: 'Table', icon: Table2 },
   ];
 
+  const handleTabClick = (tabId) => {
+    setActiveTab(tabId);
+    // Sirf tab call karein agar onTabClick function pass kiya gaya ho
+    if (tabId !== 'board' && typeof onTabClick === 'function') {
+      onTabClick();
+    }
+  };
+
   return (
-    <div className="pt-6 pb-4">
-      <div className="mb-5">
+    <div className="pt-4 pb-4">
+      {/* Task Heading & Short Description */}
+      <div className="mb-4">
         <h2 className="text-lg font-bold text-slate-800">Task</h2>
         <p className="text-xs text-slate-400 mt-0.5">Short descripction will be placed here</p>
       </div>
 
-      <div className="flex items-center gap-6 border-b border-slate-200 text-xs">
+      {/* View Switcher Tabs */}
+      <div className="flex items-center gap-6 border-b border-slate-200 text-xs overflow-x-auto no-scrollbar">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -26,13 +36,8 @@ export default function BoardHeader({ onTabClick }) {
           return (
             <button
               key={tab.id}
-              onClick={() => {
-                setActiveTab(tab.id);
-                if (tab.id !== 'board') {
-                  onTabClick();
-                }
-              }}
-              className={`flex items-center gap-1.5 pb-2.5 font-medium transition-colors relative ${
+              onClick={() => handleTabClick(tab.id)}
+              className={`flex items-center gap-1.5 pb-2.5 font-medium transition-colors relative shrink-0 ${
                 isActive
                   ? 'text-blue-600 font-semibold'
                   : 'text-slate-500 hover:text-slate-800'
