@@ -17,6 +17,7 @@ import { DollarSign, Activity, Globe } from 'lucide-react';
 
 export default function App() {
   const location = useLocation();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return localStorage.getItem('isAuthenticated') === 'true';
   });
@@ -34,7 +35,6 @@ export default function App() {
 
   const currentView = viewTitles[location.pathname] || viewTitles['/real-estate'];
 
-  // Agar login page par hain to sidebar aur topnav na dikhein
   if (location.pathname === '/login') {
     return (
       <Routes>
@@ -46,15 +46,20 @@ export default function App() {
 
   return (
     <ProtectedRoute isAuthenticated={isAuthenticated}>
-      <div className="flex min-h-screen bg-slate-50">
-        {/* 1. Left Sidebar */}
-        <Sidebar setIsAuthenticated={setIsAuthenticated} />
+      <div className="flex min-h-screen bg-slate-50 relative">
+        {/* 1. Responsive Sidebar */}
+        <Sidebar 
+          setIsAuthenticated={setIsAuthenticated} 
+          isOpen={isSidebarOpen} 
+          setIsOpen={setIsSidebarOpen} 
+        />
 
         {/* 2. Main Content Area */}
-        <div className="flex-1 flex flex-col p-8 overflow-y-auto">
+        <div className="flex-1 flex flex-col p-4 md:p-8 overflow-y-auto w-full min-w-0">
           <TopNav 
             breadcrumb={currentView.breadcrumb} 
-            title={currentView.title} 
+            title={currentView.title}
+            onMenuClick={() => setIsSidebarOpen(true)}
           />
 
           <Routes>

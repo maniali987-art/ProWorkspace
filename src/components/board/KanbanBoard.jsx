@@ -3,7 +3,6 @@ import TaskCard from './TaskCard';
 import { initialTasks } from '../../data/mockData';
 import { Plus } from 'lucide-react';
 
-
 export default function KanbanBoard() {
   const [tasks] = useState(initialTasks);
 
@@ -14,12 +13,16 @@ export default function KanbanBoard() {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+    /* flex on mobile with horizontal scroll snap, 3-column grid on desktop */
+    <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-6 pt-3 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth no-scrollbar">
       {columns.map((column) => {
         const columnTasks = tasks.filter((t) => t.status === column.id);
 
         return (
-          <div key={column.id} className="bg-slate-100/70 p-4 rounded-2xl flex flex-col gap-3 min-h-[500px]">
+          <div 
+            key={column.id} 
+            className="w-[85vw] sm:w-[320px] md:w-auto shrink-0 snap-center bg-slate-100/70 p-4 rounded-2xl flex flex-col gap-3 min-h-[500px]"
+          >
             {/* Column Header */}
             <div className="flex items-center justify-between px-1">
               <div className="flex items-center gap-2">
@@ -31,7 +34,7 @@ export default function KanbanBoard() {
                   {columnTasks.length}
                 </span>
               </div>
-              <button className="text-slate-400 hover:text-slate-700">
+              <button className="text-slate-400 hover:text-slate-700 p-1">
                 <Plus size={16} />
               </button>
             </div>
